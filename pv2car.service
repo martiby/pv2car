@@ -1,0 +1,14 @@
+[Unit]
+Description=PV2Car
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u pv2car.py
+WorkingDirectory=/home/pi/pv2car
+StandardOutput=inherit
+StandardError=inherit
+Restart=no
+User=pi
+
+[Install]
+WantedBy=multi-user.target

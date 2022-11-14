@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest"
+          href='data:application/manifest+json,{"name": "PV2Car", "scope": "/", "display": "standalone"}'/>
+    <link rel="apple-touch-icon" href="apple-touch-icon-120x120.png" sizes="120x120">
+    <meta name="author" content="Martin Steppuhn">
+    <link href="nobs.css" rel="stylesheet">
+    <!--<link href="lib/bootstrap-5.1.1/css/bootstrap.min.css" rel="stylesheet">-->
+    <title>PV2CAR</title>
+
+    <style>
+        #headline div, select {
+            color: #606060 !important;
+        }
+
+        .bg-fill {
+            fill: #606060;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+        }
+
+        table {
+            /*font-family: arial, sans-serif;*/
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 0;
+            text-align: left;
+            padding: 2px 5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #eeeeee;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!------------- Headline -------------->
+
+    <div id="headline" style="height: 30px; margin-top:8px; display: flex; align-items: center;" class="bg-fill">
+        <div style="margin-right: auto; height: 80%; display: flex;  align-items: center; width: 50%">
+            <div style="display: inline; height: 100%">
+                <svg viewBox="0 0 100 100" height="100%">
+                    <use href="#svg-pv2car"></use>
+                </svg>
+            </div>
+            <div style="display: inline;">
+                PV2Car
+            </div>
+        </div>
+        <div id="time"></div>
+        <div style="margin-left: auto; height: 70%; display: flex;  align-items: center; width: 50%">
+            <div id="info-logo" style="height: 100%; display: flex; margin-left: auto;">
+                <svg viewBox="0 0 100 100" height="100%">
+                    <use href="#svg-info-round"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <hr style="margin-top: 2px; margin-bottom: 2px">
+
+    <!------------- Debugtable -------------->
+
+    <div id="debug-container" style="display: none">
+        <table style="margin-top: 0">
+            <tr>
+                <td colspan="2" style="font-weight: bold">Version <span id="app-version"></span> - Martin Steppuhn</td>
+            </tr>
+            <tr>
+                <td>mode</td>
+                <td id="debug-mode"></td>
+            </tr>
+            <tr>
+                <td>state</td>
+                <td id="debug-state"></td>
+            </tr>
+            <tr>
+                <td>stop</td>
+                <td id="debug-stop"></td>
+            </tr>
+            <tr>
+                <td>excess</td>
+                <td id="debug-excess"></td>
+            </tr>
+            <tr>
+                <td>excess_short</td>
+                <td id="debug-excess-short"></td>
+            </tr>
+            <tr>
+                <td>excess_long</td>
+                <td id="debug-excess-long"></td>
+            </tr>
+
+            <tr>
+                <td>pv_start</td>
+                <td id="debug-pv-start"></td>
+            </tr>
+            <tr>
+                <td>pv_stop</td>
+                <td id="debug-pv-stop"></td>
+            </tr>
+            <tr>
+                <td>pv_ready</td>
+                <td id="debug-pv-ready"></td>
+            </tr>
+            <tr>
+                <td>pv_timer</td>
+                <td id="debug-pv-timer"></td>
+            </tr>
+            <tr>
+                <td>pv_block_timer</td>
+                <td id="debug-pv-block-timer"></td>
+            </tr>
+            <tr>
+                <td>phase_ready</td>
+                <td id="debug-phase-ready"></td>
+            </tr>
+            <tr>
+                <td>phase_timer</td>
+                <td id="debug-phase-timer"></td>
+            </tr>
+            <tr>
+                <td>phase_block_timer</td>
+                <td id="debug-phase-block-timer"></td>
+            </tr>
+        </table>
+    </div>
+
+    <!------------- PFlow Bars + Tableview -------------->
+
+    <div id="pflow-bar" style="margin-top: 15px"></div>
+    <div id="pflow-table" style="margin-top: 18px; margin-bottom: 25px"></div>
+
+    <!------------- Mode-Buttons -------------->
+
+    <div class="row">
+        <div class="btn-group" style="margin-bottom: 20px;">
+            <button id="stop-button" type="button" style="width: 33.3%" class="btn btn-outline-primary">STOP</button>
+            <button id="grid-button" type="button" style="width: 33.3%" class="btn btn-outline-primary">NETZ</button>
+            <button id="pv-button" type="button" style="width: 33.3%" class="btn btn-outline-primary"> PV</button>
+        </div>
+    </div>
+
+    <!------------- Settings -------------->
+
+    <div style="margin-top: 15px; margin-bottom: 20px;">
+        <select id="pvmin-select" class="form-select form-select-lg" style="margin-bottom: 10px;"></select>
+        <select id="control-reserve-select" class="form-select form-select-lg" style="margin-bottom: 10px"></select>
+        <select id="auto-phase-select" class="form-select form-select-lg">
+            <option value="false">Einphasig</option>
+            <option value="true">Phasenumschaltung</option>
+        </select>
+    </div>
+</div>
+
+<!-- SVG Images -->
+
+<div style="display: none">
+    <svg id="svg-pv2car" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22000 22000">
+        <path d="m19617 13330-346.03-865.06-613.54-1534c-526.73-1316.7-1783.1-2167.3-3201.3-2167.3h-3909.7c-1418 0-2674.6 850.58-3201.3 2167.3l-613.55 1534-346.02 865.06c-742.53 282.29-1272.6 995.27-1272.6 1836.9v1477.7c0 496.25 189.64 944.17 492.56 1290.8v1664.5c0 543.97 441.15 985.12 985.12 985.12h985.12c543.97 0 985.12-441.15 985.12-985.12v-985.12h7881v985.12c0 543.97 441.15 985.12 985.12 985.12h985.12c543.97 0 985.12-441.15 985.12-985.12v-1664.5c302.92-346.34 492.56-794.26 492.56-1290.8v-1477.7c0-841.67-530.13-1554.6-1272.7-1836.9zm-9442.7-1667.3c224.42-560.9 767.78-928.78 1372.1-928.78h3909.7c604.3 0 1147.7 367.88 1372.1 928.78l613.54 1534h-7881zm-1598.7 4975.8c-591.07 0-985.12-392.82-985.12-982.04 0-589.23 394.05-982.04 985.12-982.04s1477.7 883.83 1477.7 1473.1-886.61 491.02-1477.7 491.02zm9851.2 0c-591.08 0-1477.7 98.2-1477.7-491.02s886.61-1473.1 1477.7-1473.1c591.07 0 985.12 392.81 985.12 982.04s-394.05 982.05-985.12 982.05z"/>
+        <path d="m5154.2 11175c-1364.5-1990.4-856.12-4715.8 1133.6-6076.5 1990.4-1364.5 4715.8-856.11 6080.3 1134.3 302.87 441.8 565.99 1264.4 688.78 1756 441.23-14.004 643.19-10.355 1079-10.204l1866.7-3598.1c238.77-428.16-114.79-939-599.52-874.5l-3580.1 495.98-1000.1-3475.6c-130.92-469.29-745.1-583.87-1040.3-194.06l-2182.1 2881.9-3164.3-1754.2c-425.01-234.21-939.71 118.64-874.49 599.52l495.97 3580.1-3475.5 1000.1c-470.02 134.75-583.88 745.09-194.06 1040.2l2881.9 2182.1-1753.4 3160.5c-238.76 428.14 114.8 938.98 599.52 874.49l3102.4-426.22c322.95-432.31 707.12-809.5 1145.8-1116.9-464.18-301.08-879.04-696.25-1210-1179z"/>
+        <path d="m5537.1 8100.5c-292.17 1566.1 413.04 2674.1 1730.2 3515.6 439.27-979.5 637.57-1810.9 1425.9-2509.6 1165.5-1033 2031.7-1046.4 3264.1-1112.9-298.31-1211.6-1289.8-2268.7-2594.9-2512.2-1777.3-331.56-3493.7 841.78-3825.2 2619.1z"/>
+    </svg>
+    <svg id="svg-info-round" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+        <path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"/>
+    </svg>
+    <svg id="svg-circle-xmark-solid" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+        <path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/>
+    </svg>
+</div>
+
+<script src="pflow.js?v=9"></script>
+<script src="app.js?v=9"></script>
+<script src="app-var?v=9"></script>    <!--load config and version information from server-->
+</body>
+</html>

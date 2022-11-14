@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Martin Steppuhn">
+    <title>Fake</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-size: 1rem;
+            font-weight: 400;
+            color: #212529;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none; /* Override default CSS styles */
+            appearance: none;
+            width: 100%; /* Full-width */
+            height: 10px; /* Specified height */
+            background: #d3d3d3; /* Grey background */
+            outline: none; /* Remove outline */
+        }
+
+        input {
+            margin-bottom: 30px;
+        }
+
+        select {
+            font-size: 1.2rem;
+        }
+        .container {
+            margin: 15px 15px;
+            width: auto;
+        }
+
+        @media (min-width: 1400px) {
+            .container {
+                margin: 20px auto;
+                width: 75%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <span>PV: </span>
+    <span id="pv-value"></span>
+    <input id='pv-range' min="0" max="10000" type="range" value="0">
+    <span>Home: </span>
+    <span id="home-value"></span>
+    <input id='home-range' min="0" max="3000" type="range"  value="100">
+    <span>Bat: </span>
+    <span id="bat-value"></span>
+    <input id='bat-range' min="-2400" max="1600" type="range"  value="0">
+    <span>Car: </span>
+    <span id="car-value"></span>
+    <input id='car-range' min="0" max="10000" type="range"  value="0">
+
+    <span style="margin-right: 50px">
+        <span>Grid: </span>
+        <span id="grid-value"></span>
+    </span>
+
+    <span style="margin-right: 20px">CAR:</span>
+
+    <span style="margin-right: 30px">
+        <input id="car-stop" type="checkbox">
+        <label for="car-stop">Stop</label>
+    </span>
+
+    <span>State:</span>
+    <select id="car-state" style="margin-right: 30px">
+        <option value="idle">idle</option>
+        <option value="charge">charge</option>
+        <option value="wait">wait</option>
+        <option value="complete">complete</option>
+        <option value="error">error</option>
+    </select>
+
+    <select id="car-phase">
+        <option value="1">1x</option>
+        <option value="3">3x</option>
+    </select>
+    <select id="car-amp" style="margin-right: 30px">
+        <option value="6">6A</option>
+        <option value="7">7A</option>
+        <option value="8">8A</option>
+        <option value="9">9A</option>
+        <option value="10">10A</option>
+        <option value="11">11A</option>
+        <option value="12">12A</option>
+        <option value="13">13A</option>
+        <option value="14">14A</option>
+        <option value="15">15A</option>
+        <option value="16">16A</option>
+    </select>
+</div>
+
+<script>
+    data = {};
+
+    init = function () {
+        for(let ele of document.querySelectorAll('input[type=range]')) ele.addEventListener('input', demo);
+        for(let ele of document.querySelectorAll('input[type=checkbox]')) ele.addEventListener('click', demo);
+        for(let ele of document.querySelectorAll('select')) ele.addEventListener('change', demo);
+        demo();
+    }
+
+    demo = function () {
+        data.pv_p = parseInt(document.getElementById('pv-range').value);
+        data.home_p = parseInt(document.getElementById('home-range').value);
+        data.bat_p = parseInt(document.getElementById('bat-range').value);
+        data.car_p = parseInt(document.getElementById('car-range').value);
+        data.grid_p = -(data.pv_p - data.home_p - data.bat_p - data.car_p);
+
+        data.car_stop = document.getElementById('car-stop').checked;
+        data.car_state = document.getElementById('car-state').value;
+        data.car_phase = parseInt(document.getElementById('car-phase').value);
+        data.car_amp = parseInt(document.getElementById('car-amp').value);
+
+        console.log(data);
+
+        document.getElementById('pv-value').textContent = data.pv_p + ' W';
+        document.getElementById('home-value').textContent = data.home_p + ' W';
+        document.getElementById('bat-value').textContent = data.bat_p + ' W';
+        document.getElementById('car-value').textContent = data.car_p + ' W';
+        document.getElementById('grid-value').textContent = data.grid_p + ' W';
+
+        data.pv1_p = Math.round(data.pv_p * 0.6);
+        data.pv2_p = Math.round(data.pv_p * 0.4);
+
+        if(data.bat_p > 0) data.bat_info = "Automatik - Laden";
+        else if(data.bat_p < 0) data.bat_info = "Automatik - Einspeisen";
+        else data.bat_info = "Automatik - Schlafen";
+
+        data.bat_soc = "84";
+
+
+
+        fetch_json('sim', null, null, data);
+
+    }
+
+
+/**
+ * Fetch JSON (AJAX Request)
+ *
+ * @param url requested url
+ * @param success callback for success
+ * @param error callback for error (optional)
+ */
+function fetch_json(url, success, error, post) {
+
+    if (post) {
+        post = {
+            method: 'POST',
+            body: JSON.stringify(post),
+            headers: {'Content-Type': 'application/json'}
+        }
+    }
+
+    fetch(url, post).then(function (response) {
+        if (response.ok) {
+            return response.json();
+        } else {
+            return Promise.reject(response);
+        }
+    }).then(function (data) {
+        success(data);
+    }).catch(function (err) {
+        if (error) error(err);
+    });
+}
+
+
+
+    window.onload = function () {
+        init();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg4568"
+   viewBox="0 0 10000 10000"
+   style="clip-rule:evenodd;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+   version="1.1"
+   height="100mm"
+   width="100mm"
+   xml:space="preserve"
+   sodipodi:docname="pv2car-logo.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1920"
+   inkscape:window-height="1139"
+   id="namedview1004"
+   showgrid="false"
+   inkscape:zoom="0.84096521"
+   inkscape:cx="243.21534"
+   inkscape:cy="486.65186"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="svg4568" /><metadata
+   id="metadata4572"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata>
+ <defs
+   id="defs4558">
+  <style
+   id="style4556"
+   type="text/css">
+   <![CDATA[
+    .fil0 {fill:black}
+   ]]>
+  </style>
+ </defs>
+ 
+<g
+   style="clip-rule:evenodd;fill:#808080;fill-rule:evenodd;image-rendering:optimizeQuality;shape-rendering:geometricPrecision;text-rendering:geometricPrecision"
+   id="Ebene_x0020_1"
+   transform="matrix(0.47507673,0,0,0.47908228,3.0127577,14.000664)"><metadata
+     id="CorelCorpID_0Corel-Layer" /><path
+     id="path4561"
+     d="m 19616.8,13330.01 -346.03,-865.06 -613.54,-1534.02 C 18130.5,9614.25 16874.16,8763.67 15455.9,8763.67 h -3909.71 c -1417.96,0 -2674.6,850.58 -3201.33,2167.26 l -613.55,1534.02 -346.02,865.06 c -742.53,282.29 -1272.65,995.27 -1272.65,1836.94 v 1477.68 c 0,496.25 189.64,944.17 492.56,1290.82 v 1664.54 c 0,543.97 441.15,985.12 985.12,985.12 h 985.12 c 543.97,0 985.12,-441.15 985.12,-985.12 v -985.12 h 7880.97 v 985.12 c 0,543.97 441.15,985.12 985.12,985.12 h 985.12 c 543.97,0 985.12,-441.15 985.12,-985.12 v -1664.54 c 302.92,-346.34 492.56,-794.26 492.56,-1290.82 v -1477.68 c 0,-841.67 -530.13,-1554.65 -1272.66,-1836.94 z m -9442.69,-1667.32 c 224.42,-560.9 767.78,-928.78 1372.09,-928.78 h 3909.7 c 604.3,0 1147.66,367.88 1372.09,928.78 l 613.54,1534.02 H 9560.56 Z m -1598.67,4975.78 c -591.07,0 -985.12,-392.82 -985.12,-982.04 0,-589.23 394.05,-982.04 985.12,-982.04 591.07,0 1477.68,883.83 1477.68,1473.06 0,589.23 -886.61,491.02 -1477.68,491.02 z m 9851.21,0 c -591.08,0 -1477.69,98.2 -1477.69,-491.02 0,-589.22 886.61,-1473.06 1477.69,-1473.06 591.07,0 985.12,392.81 985.12,982.04 0,589.23 -394.05,982.05 -985.12,982.05 z"
+     class="fil0"
+     inkscape:connector-curvature="0"
+     style="fill:#808080" /><path
+     style="fill:#808080"
+     id="path4563"
+     d="M 5154.24,11175.02 C 3789.7,9184.62 4298.12,6459.23 6287.82,5098.52 c 1990.39,-1364.53 4715.79,-856.11 6080.33,1134.3 302.87,441.8 565.986,1264.3843 688.776,1756.0043 441.234,-14.0042 643.188,-10.3551 1078.997,-10.2042 L 16002.65,4380.56 c 238.77,-428.16 -114.79,-939 -599.52,-874.5 L 11823.03,4002.04 10822.94,526.49 C 10692.02,57.2 10077.84,-57.38 9782.68,332.43 L 7600.58,3214.34 4436.26,1460.18 c -425.01,-234.21 -939.71,118.64 -874.49,599.52 L 4057.74,5639.8 582.21,6639.9 C 112.19,6774.65 -1.67,7384.99 388.15,7680.15 L 3270.04,9862.26 1516.6,13022.74 c -238.76,428.14 114.8,938.98 599.52,874.49 l 3102.35,-426.22 c 322.95,-432.31 707.12,-809.5 1145.8,-1116.94 -464.18,-301.08 -879.04,-696.25 -1210.03,-1179.05 z"
+     class="fil0"
+     inkscape:connector-curvature="0" /><path
+     style="fill:#808080"
+     id="path4565"
+     d="m 5537.13,8100.49 c -292.17,1566.14 413.04,2674.11 1730.15,3515.63 439.27,-979.5 637.57,-1810.94 1425.88,-2509.61 C 9858.68,8073.49 10724.843,8060.0865 11957.265,7993.6131 11658.955,6782.0531 10667.46,5724.89 9362.35,5481.43 7585.08,5149.87 5868.68,6323.21 5537.13,8100.49 Z"
+     class="fil0"
+     inkscape:connector-curvature="0" /></g></svg>
